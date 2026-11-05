@@ -3,43 +3,22 @@
 
 int main() {
 
-    // Cria o escultor com dimensões suficientes
-    // para comportar toda a escultura
+  
     Sculptor s(9, 22, 9);
-
-    // =========================================
-    // 1. COR AZUL TRANSLÚCIDA
-    // =========================================
 
     s.setColor(0.0f, 0.0f, 1.0f, 0.5f);
 
-    // Elipsoide inferior
     s.putEllipsoid(4, 0, 4, 3, 2, 3);
 
-    // Fileira vertical de voxels (caixa)
     s.putBox(4, 4, 2, 6, 4, 4);
 
-    // Elipsoide vertical maior
     s.putEllipsoid(4, 21, 4, 3, 15, 3);
-
-    // =========================================
-    // 2. RETIRADA DO INTERIOR DO ELIPSOIDE
-    // =========================================
 
     s.cutEllipsoid(4, 21, 4, 3, 13, 3);
 
-    // =========================================
-    // 3. COR MAGENTA OPACA
-    // =========================================
-
     s.setColor(1.0f, 0.0f, 1.0f, 1.0f);
 
-    // Elipsoide interno magenta
     s.putEllipsoid(4, 21, 4, 3, 13, 3);
-
-    // =========================================
-    // 4. GERAÇÃO DO ARQUIVO OFF
-    // =========================================
 
     s.writeOFF("escultura.off");
 
