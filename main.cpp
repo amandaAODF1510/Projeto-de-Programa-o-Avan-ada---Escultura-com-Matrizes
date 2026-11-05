@@ -11,7 +11,7 @@ s.putEllipsoid(8, 0, 8, 6, 4, 6);
 
 s.putBox(8, 8, 4, 12, 8, 8);
 
-s.putEllipsoid(8, 42, 8, 6, 30, 6);
+s.putEllipsoid(8, 42, 8, 8, 30, 8);
 
 s.cutEllipsoid(8, 42, 8, 6, 26, 6);
 
