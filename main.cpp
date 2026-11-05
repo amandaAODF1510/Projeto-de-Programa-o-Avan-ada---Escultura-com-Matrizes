@@ -3,7 +3,7 @@
 
 int main() {
 
-Sculptor s(18, 44, 18);
+Sculptor s(18, 42, 18);
 
 s.setColor(0.0f, 0.0f, 1.0f, 0.5f);
 
