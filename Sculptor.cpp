@@ -224,53 +224,26 @@ void Sculptor::writeOFF(const char* filename) {
 
 int voxelIndex = 0;
 
+auto writeFace = [&fout](int a, int b, int c, int d, const Voxel& voxel) {
+    fout << "4 " << a << " " << b << " " << c << " " << d
+         << " " << static_cast<int>(voxel.r * 255)
+         << " " << static_cast<int>(voxel.g * 255)
+         << " " << static_cast<int>(voxel.b * 255) << "\n";
+};
+
 for (int i = 0; i < nx; i++) {
     for (int j = 0; j < ny; j++) {
         for (int k = 0; k < nz; k++) {
             if (v[i][j][k].show) {
                 int base = 8 * voxelIndex;
+                const Voxel& voxel = v[i][j][k];
 
-                fout << "4 " << base     << " " << base + 3
-                     << " " << base + 2 << " " << base + 1
-                     << " " << v[i][j][k].r
-                     << " " << v[i][j][k].g
-                     << " " << v[i][j][k].b
-                     << " " << v[i][j][k].a << "\n";
-
-                fout << "4 " << base + 4 << " " << base + 5
-                     << " " << base + 6 << " " << base + 7
-                     << " " << v[i][j][k].r
-                     << " " << v[i][j][k].g
-                     << " " << v[i][j][k].b
-                     << " " << v[i][j][k].a << "\n";
-
-                fout << "4 " << base     << " " << base + 1
-                     << " " << base + 5 << " " << base + 4
-                     << " " << v[i][j][k].r
-                     << " " << v[i][j][k].g
-                     << " " << v[i][j][k].b
-                     << " " << v[i][j][k].a << "\n";
-
-                fout << "4 " << base + 1 << " " << base + 2
-                     << " " << base + 6 << " " << base + 5
-                     << " " << v[i][j][k].r
-                     << " " << v[i][j][k].g
-                     << " " << v[i][j][k].b
-                     << " " << v[i][j][k].a << "\n";
-
-                fout << "4 " << base + 2 << " " << base + 3
-                     << " " << base + 7 << " " << base + 6
-                     << " " << v[i][j][k].r
-                     << " " << v[i][j][k].g
-                     << " " << v[i][j][k].b
-                     << " " << v[i][j][k].a << "\n";
-
-                fout << "4 " << base + 3 << " " << base
-                     << " " << base + 4 << " " << base + 7
-                     << " " << v[i][j][k].r
-                     << " " << v[i][j][k].g
-                     << " " << v[i][j][k].b
-                     << " " << v[i][j][k].a << "\n";
+                writeFace(base, base + 3, base + 2, base + 1, voxel);
+                writeFace(base + 4, base + 5, base + 6, base + 7, voxel);
+                writeFace(base, base + 1, base + 5, base + 4, voxel);
+                writeFace(base + 1, base + 2, base + 6, base + 5, voxel);
+                writeFace(base + 2, base + 3, base + 7, base + 6, voxel);
+                writeFace(base + 3, base, base + 4, base + 7, voxel);
 
                 voxelIndex++;
             }
